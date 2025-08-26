@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Currículum Adonis Gramaje Victoria</title>
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&family=Roboto&display=swap');
+
+        body {
+            margin: 0;
+            background: #0e0e0e;
+            font-family: 'Roboto', sans-serif;
+            color: #ddd;
+            line-height: 1.5;
+            height: 100vh;
+            --x: calc(var(--posX, 0) * 1px);
+            --y: calc(var(--posY, 0) * 1px);
+            background-image:
+                linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)),
+                radial-gradient(90% 100% at calc(50% + var(--x)) calc(0% + var(--y)), rgb(200 200 200), rgb(22 0 45)),
+                radial-gradient(100% 100% at calc(80% - var(--x)) calc(0% - var(--y)), rgb(250 255 0), rgb(36 0 0)),
+                radial-gradient(150% 210% at calc(100% + var(--x)) calc(0% + var(--y)), rgb(20 175 125), rgb(0 10 255)),
+                radial-gradient(100% 100% at calc(100% - var(--x)) calc(30% - var(--y)), rgb(255 77 0), rgb(0 200 255)),
+                linear-gradient(60deg, rgb(255 0 0), rgb(120 86 255));
+            background-blend-mode: overlay, overlay, difference, difference, difference, normal;
+        }
+
+        .container {
+            max-width: 900px;
+            padding: 30px 40px;
+            margin: 40px auto;
+            background: #121212cc;
+            border-radius: 10px;
+            box-shadow: 0 0 35px rgba(0, 0, 0, 0.85);
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Roboto Slab', serif;
+            color: #00ff7f;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            border-bottom: 2px solid #00ff7f;
+            padding-bottom: 5px;
+            margin-top: 20px;
+            /* menos espacio superior */
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        p,
+        li {
+            font-size: 1rem;
+            color: #ccc;
+        }
+
+        .header-contact {
+            font-size: 1.1rem;
+            margin-top: 6px;
+            margin-bottom: 15px;
+            /* reducido */
+            color: #a6a6a6;
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .contact-icons {
+            margin-top: 10px;
+        }
+
+        .contact-icons a {
+            font-size: 1.6rem;
+            color: #00ff7f;
+            margin-right: 15px;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        .contact-icons a:hover {
+            color: #7ef3b8;
+            transform: scale(1.15);
+        }
+
+        ul {
+            margin-top: 5px;
+            padding-left: 20px;
+            color: #bbb;
+        }
+
+        ul li {
+            margin-bottom: 6px;
+        }
+
+        .experience-item {
+            margin-bottom: 20px;
+        }
+
+        .position {
+            font-weight: 700;
+            color: #00ffa3;
+        }
+
+        .company-date {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #7ef3b8;
+            margin-bottom: 6px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 0.85rem;
+            color: #555;
+            text-align: center;
+        }
+
+        .foto-perfil img {
+            width: 150px;
+            height: auto;
+            border-radius: 12px;
+            border: 3px solid #00ff7f;
+            box-shadow: 0 0 15px rgba(0, 255, 127, 0.4);
+        }
+
+        @media (max-width:600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .header-flex {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .foto-perfil {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header-flex">
+            <div>
+                <h1>Adonis Gramaje Victoria</h1>
+                <div class="header-contact">
+                    TÉCNICO INFORMÁTICO ESPECIALISTA EN CIBERSEGURIDAD
+                    <div class="contact-icons">
+                        <a href="tel:+34664349811" title="Llamar"><i class="fa-solid fa-phone"></i></a>
+                        <a href="mailto:adonixblur21@hotmail.com" title="Enviar correo"><i
+                                class="fa-solid fa-envelope"></i></a>
+                        <a href="https://www.linkedin.com/in/adonis-gra-65b6b543/" target="_blank" rel="noopener"
+                            title="LinkedIn">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="foto-perfil">
+                <img src="fotodni_mejorada.jpg" alt="Foto perfil">
+            </div>
+        </div>
+
+        <h2>Perfil Profesional</h2>
+        <p>Técnico informático con más de 7 años de experiencia en soporte, sistemas y ciberseguridad. Especializado en
+            administración de sistemas, redes y ciberseguridad en entornos corporativos, sanitarios y públicos.
+            Orientado a la
+            resolución eficaz de incidencias, servicio al usuario y mejora continua. Comprometido con la formación
+            permanente
+            y la excelencia tecnológica.</p>
+
+        <h2>Habilidades Técnicas</h2>
+        <ul>
+            <li>Windows, Linux (Kali, Ubuntu, lliurex, mint, tsurugi, Android)</li>
+            <li>Cisco, Teldat, Juniper, firewalls, BGP, troubleshooting</li>
+            <li>Maquetación y administración de PCs, impresoras, periféricos, máquinas virtuales (VirtualBox, Vmware)
+            </li>
+            <li>Gestión de incidencias en Jira, Service Now y Remedy</li>
+            <li>Active Directory, Intune, Microsoft 365, Docker,telco, CRM, avaya, logs terminal</li>
+            <li>Soporte remoto y presencial, administración de credenciales, Bitlocker, Authenticator, RSA</li>
+            <li>Redes: configuración de switches, routers, backups, Aruba</li>
+        </ul>
+
+        <h2>Competencias Personales</h2>
+        <ul>
+            <li>Orientación al usuario</li>
+            <li>Trabajo en equipo</li>
+            <li>Proactividad</li>
+            <li>Comunicación asertiva</li>
+            <li>Gestión del tiempo</li>
+            <li>Resolutivo</li>
+            <li>Adaptativo</li>
+            <li>Capacidad de aprendizaje continuo</li>
+        </ul>
+
+        <h2>Experiencia Profesional</h2>
+        <div class="experience-item">
+            <div class="position">Técnico de Soporte Informático N2</div>
+            <div class="company-date">NTT DATA / GVA Subvenciones | Mar 2025 – Jun 2025</div>
+            <ul>
+                <li>Soporte técnico de segundo nivel a gestores de subvenciones de la Generalitat Valenciana</li>
+                <li>Gestión y resolución de incidencias mediante Jira Gestic</li>
+                <li>Resolución de problemas por ticketing y acceso remoto</li>
+                <li>Asignación de accesos a aplicaciones específicas</li>
+                <li>Atención presencial y remota a usuarios</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="position">Técnico de Sistemas</div>
+            <div class="company-date">Grupo Hasten (ATOS) / Sanidad | Ago 2024 – Ene 2025</div>
+            <ul>
+                <li>Resolución integral de incidencias informáticas en zona la costera hospitale de Xàtiva , Ontinyent y
+                    ambulatorios (zona)</li>
+                <li>Reparación de hardware y periféricos</li>
+                <li>Maquetación, configuración e instalación de equipos</li>
+                <li>Gestión de tickets en Jira y soporte presencial</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="position">Técnico de Soporte IT</div>
+            <div class="company-date">DXC Technology | 2024</div>
+            <ul>
+                <li>Resolución de incidencias con Service Now y HelpIn</li>
+                <li>Administración de entornos virtuales, Active Directory e Intune</li>
+                <li>Soporte usuario en Microsoft 365, Bitlocker, Authenticator y RSA</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="position">Técnico Informático</div>
+            <div class="company-date">Empresa en Ontinyent | 2023</div>
+            <ul>
+                <li>Instalación y mantenimiento de software y hardware</li>
+                <li>Maquetación de PCs, tramitación de credenciales , instalación de software y hardware de equipos
+                    informáticos</li>
+                <li>Atención a cliente presencial/remota con ticketing</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="position">Técnico de Redes N1</div>
+            <div class="company-date">Inelcom / CEX | 2022</div>
+            <ul>
+                <li>Gestión de incidencias y soporte de redes (routers, switches, backups, Aruba)</li>
+                <li>Ticketing Remedy y soporte telefónico</li>
+                <li>Configuración, revisión, resolución y pruebas de equipos</li>
+            </ul>
+        </div>
+
+        <h2>Formación Académica</h2>
+        <ul>
+            <li>Especialización en Ciberseguridad en Entornos de Tecnologías de la Información – IES Antonio Sequeros
+                (2024-2025)</li>
+            <li>Grado Superior en Administración de Sistemas Informáticos en Red (ASIX) – IES Sant Vicent Ferrer
+                (2023-2024)</li>
+            <li>Grado Medio en Sistemas Microinformáticos y Redes – IES L’Estació Ontinyent (2022-2023)</li>
+        </ul>
+
+        <h2>Certificaciones</h2>
+        <ul>
+            <li>CCST (Cisco)</li>
+            <li>CAPC (CertiProf)</li>
+            <li>Ethical Hacker (UC0487_3)</li>
+            <li>Cisco: Networking Basics, CiberSecurity Essentials, Managing Network Security, Introducción a la
+                Seguridad Ciberbética</li>
+            <li>IFCT135PO: Ciberseguridad para usuarios</li>
+            <li>F211468AA-3: Gestión de la seguridad en la empresa</li>
+            <li>IFCT107PO: Sistemas y Servidores Web</li>
+            <li>Digitalización aplicada al sector productivo</li>
+            <li>Cursando EJPT (INE) y Analista en Ciberseguridad (Cisco)</li>
+        </ul>
+
+        <h2>Idiomas</h2>
+        <ul>
+            <li>Castellano (nativo)</li>
+            <li>Valenciano (avanzado)</li>
+            <li>Inglés A-2 matrículado EOI para (B1-Intermedio)</li>
+        </ul>
+
+        <div class="footer">
+            &copy; 2025 Adonis Gramaje Victoria
+        </div>
+    </div>
+
+    <script>
+        document.body.addEventListener("pointermove", (e) => {
+            const { currentTarget: el, clientX: x, clientY: y } = e;
+            const { top: t, left: l, width: w, height: h } = el.getBoundingClientRect();
+            el.style.setProperty('--posX', x - l - w / 2);
+            el.style.setProperty('--posY', y - t - h / 2);
+        });
+    </script>
+</body>
+
+</html>
