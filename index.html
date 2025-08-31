@@ -56,7 +56,6 @@
             border-bottom: 2px solid #00ff7f;
             padding-bottom: 5px;
             margin-top: 20px;
-            /* menos espacio superior */
         }
 
         h3 {
@@ -74,7 +73,6 @@
             font-size: 1.1rem;
             margin-top: 6px;
             margin-bottom: 15px;
-            /* reducido */
             color: #a6a6a6;
         }
 
@@ -142,6 +140,43 @@
             box-shadow: 0 0 15px rgba(0, 255, 127, 0.4);
         }
 
+        /* Estilos del formulario */
+        .contact-form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-form label {
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #00ff7f;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 10px;
+            border: 1px solid #00ff7f;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .contact-form button {
+            background: #00ff7f;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .contact-form button:hover {
+            background: #00cc66;
+        }
+
         @media (max-width:600px) {
             .container {
                 padding: 20px;
@@ -186,10 +221,8 @@
         <h2>Perfil Profesional</h2>
         <p>Técnico informático con más de 7 años de experiencia en soporte, sistemas y ciberseguridad. Especializado en
             administración de sistemas, redes y ciberseguridad en entornos corporativos, sanitarios y públicos.
-            Orientado a la
-            resolución eficaz de incidencias, servicio al usuario y mejora continua. Comprometido con la formación
-            permanente
-            y la excelencia tecnológica.</p>
+            Orientado a la resolución eficaz de incidencias, servicio al usuario y mejora continua. Comprometido con la
+            formación permanente y la excelencia tecnológica.</p>
 
         <h2>Habilidades Técnicas</h2>
         <ul>
@@ -300,6 +333,21 @@
             <li>Valenciano (avanzado)</li>
             <li>Inglés A-2 matrículado EOI para (B1-Intermedio)</li>
         </ul>
+
+        <!-- FORMULARIO DE CONTACTO -->
+        <h2>Contacto</h2>
+        <form action="https://formspree.io/f/mqadbjop" method="POST" class="contact-form">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="_replyto" required>
+
+            <label for="message">Dudas o comentarios:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Enviar</button>
+        </form>
 
         <div class="footer">
             &copy; 2025 Adonis Gramaje Victoria
