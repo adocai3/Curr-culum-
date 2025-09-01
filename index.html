@@ -19,14 +19,23 @@
             font-family: 'Roboto', sans-serif;
             color: #ddd;
             line-height: 1.5;
+            overflow-x: hidden;
+            /* evita scroll lateral en móviles */
+            background: #000;
+            /* fondo de fallback mientras carga canvas */
         }
 
         /* Canvas del fondo animado */
         canvas#bg {
             position: fixed;
-            inset: 0;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             z-index: 0;
             display: block;
+            pointer-events: none;
+            /* para que no interfiera con controles */
         }
 
         /* Panel de control del fondo */
@@ -72,6 +81,7 @@
         /* Contenedor principal del CV */
         .container {
             max-width: 900px;
+            width: 95%;
             padding: 30px 40px;
             margin: 40px auto;
             background: #121212cc;
@@ -90,24 +100,24 @@
         }
 
         h1 {
-            font-size: 2.8rem;
+            font-size: clamp(2rem, 5vw, 2.8rem);
         }
 
         h2 {
-            font-size: 1.8rem;
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
             border-bottom: 2px solid #00ff7f;
             padding-bottom: 5px;
             margin-top: 20px;
         }
 
         h3 {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 3.5vw, 1.2rem);
             margin-top: 20px;
         }
 
         p,
         li {
-            font-size: 1rem;
+            font-size: clamp(0.95rem, 2.5vw, 1rem);
             color: #ccc;
         }
 
@@ -176,6 +186,7 @@
 
         .foto-perfil img {
             width: 150px;
+            max-width: 40vw;
             height: auto;
             border-radius: 12px;
             border: 3px solid #00ff7f;
@@ -233,6 +244,15 @@
             .foto-perfil {
                 margin-top: 20px;
             }
+
+            /* Ajuste para el panel UI en pantallas muy pequeñas */
+            .ui {
+                right: 10px;
+                left: 10px;
+                top: auto;
+                bottom: 18px;
+                min-width: auto;
+            }
         }
     </style>
 </head>
@@ -242,7 +262,7 @@
     <canvas id="bg"></canvas>
 
     <!-- Controles del fondo -->
-    <div class="ui">
+    <div class="ui" role="region" aria-label="Controles del fondo animado">
         <h3>Efecto de fondo</h3>
         <label>
             Seleccionar efecto
@@ -286,121 +306,121 @@
             </div>
         </div>
 
-    <h2>Perfil Profesional</h2>
-    <p>Técnico informático con más de 7 años de experiencia en soporte, sistemas y ciberseguridad. Especializado en
-        administración de sistemas, redes y ciberseguridad en entornos corporativos, sanitarios y públicos.
-        Orientado a la resolución eficaz de incidencias, servicio al usuario y mejora continua. Comprometido con la
-        formación permanente y la excelencia tecnológica.</p>
-    
-    <h2>Habilidades Técnicas</h2>
-    <ul>
-        <li>Windows, Linux (Kali, Ubuntu, lliurex, mint, tsurugi, Android)</li>
-        <li>Cisco, Teldat, Juniper, firewalls, BGP, troubleshooting</li>
-        <li>Maquetación y administración de PCs, impresoras, periféricos, máquinas virtuales (VirtualBox, Vmware)
-        </li>
-        <li>Gestión de incidencias en Jira, Service Now y Remedy</li>
-        <li>Active Directory, Intune, Microsoft 365, Docker,telco, CRM, avaya, logs terminal</li>
-        <li>Soporte remoto y presencial, administración de credenciales, Bitlocker, Authenticator, RSA</li>
-        <li>Redes: configuración de switches, routers, backups, Aruba</li>
-    </ul>
-    
-    <h2>Competencias Personales</h2>
-    <ul>
-        <li>Orientación al usuario</li>
-        <li>Trabajo en equipo</li>
-        <li>Proactividad</li>
-        <li>Comunicación asertiva</li>
-        <li>Gestión del tiempo</li>
-        <li>Resolutivo</li>
-        <li>Adaptativo</li>
-        <li>Capacidad de aprendizaje continuo</li>
-    </ul>
-    
-    <h2>Experiencia Profesional</h2>
-    <div class="experience-item">
-        <div class="position">Técnico de Soporte Informático N2</div>
-        <div class="company-date">NTT DATA / GVA Subvenciones | Mar 2025 – Jun 2025</div>
+        <h2>Perfil Profesional</h2>
+        <p>Técnico informático con más de 7 años de experiencia en soporte, sistemas y ciberseguridad. Especializado en
+            administración de sistemas, redes y ciberseguridad en entornos corporativos, sanitarios y públicos.
+            Orientado a la resolución eficaz de incidencias, servicio al usuario y mejora continua. Comprometido con la
+            formación permanente y la excelencia tecnológica.</p>
+
+        <h2>Habilidades Técnicas</h2>
         <ul>
-            <li>Soporte técnico de segundo nivel a gestores de subvenciones de la Generalitat Valenciana</li>
-            <li>Gestión y resolución de incidencias mediante Jira Gestic</li>
-            <li>Resolución de problemas por ticketing y acceso remoto</li>
-            <li>Asignación de accesos a aplicaciones específicas</li>
-            <li>Atención presencial y remota a usuarios</li>
+            <li>Windows, Linux (Kali, Ubuntu, lliurex, mint, tsurugi, Android)</li>
+            <li>Cisco, Teldat, Juniper, firewalls, BGP, troubleshooting</li>
+            <li>Maquetación y administración de PCs, impresoras, periféricos, máquinas virtuales (VirtualBox, Vmware)
+            </li>
+            <li>Gestión de incidencias en Jira, Service Now y Remedy</li>
+            <li>Active Directory, Intune, Microsoft 365, Docker,telco, CRM, avaya, logs terminal</li>
+            <li>Soporte remoto y presencial, administración de credenciales, Bitlocker, Authenticator, RSA</li>
+            <li>Redes: configuración de switches, routers, backups, Aruba</li>
         </ul>
-    </div>
-    
-    <div class="experience-item">
-        <div class="position">Técnico de Sistemas</div>
-        <div class="company-date">Grupo Hasten (ATOS) / Sanidad | Ago 2024 – Ene 2025</div>
+
+        <h2>Competencias Personales</h2>
         <ul>
-            <li>Resolución integral de incidencias informáticas en zona la costera hospitale de Xàtiva , Ontinyent y
-                ambulatorios (zona)</li>
-            <li>Reparación de hardware y periféricos</li>
-            <li>Maquetación, configuración e instalación de equipos</li>
-            <li>Gestión de tickets en Jira y soporte presencial</li>
+            <li>Orientación al usuario</li>
+            <li>Trabajo en equipo</li>
+            <li>Proactividad</li>
+            <li>Comunicación asertiva</li>
+            <li>Gestión del tiempo</li>
+            <li>Resolutivo</li>
+            <li>Adaptativo</li>
+            <li>Capacidad de aprendizaje continuo</li>
         </ul>
-    </div>
-    
-    <div class="experience-item">
-        <div class="position">Técnico de Soporte IT</div>
-        <div class="company-date">DXC Technology | 2024</div>
+
+        <h2>Experiencia Profesional</h2>
+        <div class="experience-item">
+            <div class="position">Técnico de Soporte Informático N2</div>
+            <div class="company-date">NTT DATA / GVA Subvenciones | Mar 2025 – Jun 2025</div>
+            <ul>
+                <li>Soporte técnico de segundo nivel a gestores de subvenciones de la Generalitat Valenciana</li>
+                <li>Gestión y resolución de incidencias mediante Jira Gestic</li>
+                <li>Resolución de problemas por ticketing y acceso remoto</li>
+                <li>Asignación de accesos a aplicaciones específicas</li>
+                <li>Atención presencial y remota a usuarios</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="position">Técnico de Sistemas</div>
+            <div class="company-date">Grupo Hasten (ATOS) / Sanidad | Ago 2024 – Ene 2025</div>
+            <ul>
+                <li>Resolución integral de incidencias informáticas en zona la costera hospitale de Xàtiva , Ontinyent y
+                    ambulatorios (zona)</li>
+                <li>Reparación de hardware y periféricos</li>
+                <li>Maquetación, configuración e instalación de equipos</li>
+                <li>Gestión de tickets en Jira y soporte presencial</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="position">Técnico de Soporte IT</div>
+            <div class="company-date">DXC Technology | 2024</div>
+            <ul>
+                <li>Resolución de incidencias con Service Now y HelpIn</li>
+                <li>Administración de entornos virtuales, Active Directory e Intune</li>
+                <li>Soporte usuario en Microsoft 365, Bitlocker, Authenticator y RSA</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="position">Técnico Informático</div>
+            <div class="company-date">Empresa en Ontinyent | 2023</div>
+            <ul>
+                <li>Instalación y mantenimiento de software y hardware</li>
+                <li>Maquetación de PCs, tramitación de credenciales , instalación de software y hardware de equipos
+                    informáticos</li>
+                <li>Atención a cliente presencial/remota con ticketing</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="position">Técnico de Redes N1</div>
+            <div class="company-date">Inelcom / CEX | 2022</div>
+            <ul>
+                <li>Gestión de incidencias y soporte de redes (routers, switches, backups, Aruba)</li>
+                <li>Ticketing Remedy y soporte telefónico</li>
+                <li>Configuración, revisión, resolución y pruebas de equipos</li>
+            </ul>
+        </div>
+
+        <h2>Formación Académica</h2>
         <ul>
-            <li>Resolución de incidencias con Service Now y HelpIn</li>
-            <li>Administración de entornos virtuales, Active Directory e Intune</li>
-            <li>Soporte usuario en Microsoft 365, Bitlocker, Authenticator y RSA</li>
+            <li>Especialización en Ciberseguridad en Entornos de Tecnologías de la Información – IES Antonio Sequeros
+                (2024-2025)</li>
+            <li>Grado Superior en Administración de Sistemas Informáticos en Red (ASIX) – IES Sant Vicent Ferrer
+                (2022-2024)</li>
+            <li>Grado Medio en Sistemas Microinformáticos y Redes – IES L’Estació Ontinyent (2020-2022)</li>
         </ul>
-    </div>
-    
-    <div class="experience-item">
-        <div class="position">Técnico Informático</div>
-        <div class="company-date">Empresa en Ontinyent | 2023</div>
+
+        <h2>Certificaciones</h2>
         <ul>
-            <li>Instalación y mantenimiento de software y hardware</li>
-            <li>Maquetación de PCs, tramitación de credenciales , instalación de software y hardware de equipos
-                informáticos</li>
-            <li>Atención a cliente presencial/remota con ticketing</li>
+            <li>CCST (Cisco)</li>
+            <li>CAPC (CertiProf)</li>
+            <li>Ethical Hacker (UC0487_3)</li>
+            <li>Cisco: Networking Basics, CiberSecurity Essentials, Managing Network Security, Introducción a la
+                Seguridad Ciberbética</li>
+            <li>IFCT135PO: Ciberseguridad para usuarios</li>
+            <li>F211468AA-3: Gestión de la seguridad en la empresa</li>
+            <li>IFCT107PO: Sistemas y Servidores Web</li>
+            <li>Digitalización aplicada al sector productivo</li>
+            <li>Cursando EJPT (INE) y Analista en Ciberseguridad (Cisco)</li>
         </ul>
-    </div>
-    
-    <div class="experience-item">
-        <div class="position">Técnico de Redes N1</div>
-        <div class="company-date">Inelcom / CEX | 2022</div>
+
+        <h2>Idiomas</h2>
         <ul>
-            <li>Gestión de incidencias y soporte de redes (routers, switches, backups, Aruba)</li>
-            <li>Ticketing Remedy y soporte telefónico</li>
-            <li>Configuración, revisión, resolución y pruebas de equipos</li>
+            <li>Castellano (nativo)</li>
+            <li>Valenciano (avanzado)</li>
+            <li>Inglés A-2 matrículado EOI para (B1-Intermedio)</li>
         </ul>
-    </div>
-    
-    <h2>Formación Académica</h2>
-    <ul>
-        <li>Especialización en Ciberseguridad en Entornos de Tecnologías de la Información – IES Antonio Sequeros
-            (2024-2025)</li>
-        <li>Grado Superior en Administración de Sistemas Informáticos en Red (ASIX) – IES Sant Vicent Ferrer
-            (2022-2024)</li>
-        <li>Grado Medio en Sistemas Microinformáticos y Redes – IES L’Estació Ontinyent (2020-2022)</li>
-    </ul>
-    
-    <h2>Certificaciones</h2>
-    <ul>
-        <li>CCST (Cisco)</li>
-        <li>CAPC (CertiProf)</li>
-        <li>Ethical Hacker (UC0487_3)</li>
-        <li>Cisco: Networking Basics, CiberSecurity Essentials, Managing Network Security, Introducción a la
-            Seguridad Ciberbética</li>
-        <li>IFCT135PO: Ciberseguridad para usuarios</li>
-        <li>F211468AA-3: Gestión de la seguridad en la empresa</li>
-        <li>IFCT107PO: Sistemas y Servidores Web</li>
-        <li>Digitalización aplicada al sector productivo</li>
-        <li>Cursando EJPT (INE) y Analista en Ciberseguridad (Cisco)</li>
-    </ul>
-    
-    <h2>Idiomas</h2>
-    <ul>
-        <li>Castellano (nativo)</li>
-        <li>Valenciano (avanzado)</li>
-        <li>Inglés A-2 matrículado EOI para (B1-Intermedio)</li>
-    </ul>
 
         <h2>Contacto</h2>
         <form action="https://formspree.io/f/mqadbjop" method="POST" class="contact-form">
@@ -416,12 +436,14 @@
         <div class="footer">&copy; 2025 Adonis Gramaje Victoria</div>
     </div>
 
-    <!-- Script del fondo animado -->
+    <!-- Script del fondo animado (correcciones aplicadas) -->
     <script>
         const canvas = document.getElementById('bg');
         const ctx = canvas.getContext('2d');
-        let w = canvas.width = innerWidth;
-        let h = canvas.height = innerHeight;
+
+        // Variables de tamaño en píxeles lógicos (CSS pixels)
+        let w = window.innerWidth;
+        let h = window.innerHeight;
 
         const effectSelect = document.getElementById('effect');
         const speedInput = document.getElementById('speed');
@@ -429,17 +451,34 @@
         const togglePauseBtn = document.getElementById('togglePause');
 
         let paused = false;
-        togglePauseBtn.addEventListener('click', () => { paused = !paused; togglePauseBtn.textContent = paused ? 'Reanudar' : 'Pausar' });
-
-        addEventListener('resize', () => {
-            w = canvas.width = innerWidth;
-            h = canvas.height = innerHeight;
-            initParticles();
-            initMatrix();
-            fixHDPI();
+        togglePauseBtn.addEventListener('click', () => {
+            paused = !paused;
+            togglePauseBtn.textContent = paused ? 'Reanudar' : 'Pausar';
         });
 
-        let lastTime = 0;
+        // Evitar dibujar cuando la pestaña está oculta (ahorra CPU)
+        document.addEventListener('visibilitychange', () => {
+            paused = document.hidden ? true : paused;
+        });
+
+        // Inicializa el canvas para pantallas HiDPI sin acumular transformaciones
+        function fixHDPI() {
+            const dpr = Math.max(1, window.devicePixelRatio || 1);
+            // Tamaño CSS
+            canvas.style.width = window.innerWidth + 'px';
+            canvas.style.height = window.innerHeight + 'px';
+            // Tamaño real del backing store
+            canvas.width = Math.round(window.innerWidth * dpr);
+            canvas.height = Math.round(window.innerHeight * dpr);
+            // Establecer transform para mapear coordenadas lógicas -> backing store (resetea transform)
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            // Mantener w y h en píxeles lógicos para el código de dibujo
+            w = window.innerWidth;
+            h = window.innerHeight;
+        }
+
+        // Llamar a fixHDPI inicialmente
+        fixHDPI();
 
         // --- Gradiente ---
         function drawGradient(t, speed, globalOpacity) {
@@ -479,8 +518,10 @@
             for (let p of particles) {
                 p.x += p.vx * dt * 0.06 * speed;
                 p.y += p.vy * dt * 0.06 * speed;
-                if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
-                if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+                if (p.x < 0) p.x = w;
+                if (p.x > w) p.x = 0;
+                if (p.y < 0) p.y = h;
+                if (p.y > h) p.y = 0;
             }
             ctx.beginPath();
             for (let i = 0; i < particles.length; i++) {
@@ -506,7 +547,7 @@
         let matrixCols = [], fontSize = 14, matrixChars = [];
         function initMatrix() {
             fontSize = Math.max(12, Math.floor(Math.min(w, h) / 64 * 14));
-            const cols = Math.floor(w / fontSize);
+            const cols = Math.max(2, Math.floor(w / fontSize));
             matrixCols = new Array(cols).fill(0).map(() => Math.floor(Math.random() * h / fontSize));
             matrixChars = '01あいうえおかきくけこサシスセソカキクケコアイウエオ<>/#%$@*■▲'.split('');
         }
@@ -523,11 +564,34 @@
                 ctx.fillStyle = `rgba(140,255,170,${0.9 * globalOpacity})`;
                 ctx.fillText(char, x, y);
                 if (y > h && Math.random() > 0.975) matrixCols[i] = 0;
-                matrixCols[i] += speed * 0.5;
+                matrixCols[i] += Math.max(0.2, speed * 0.5);
             }
         }
 
-        // Bucle
+        // Inicializaciones
+        initParticles();
+        initMatrix();
+
+        // Asegurar re-inicialización cuando el usuario cambia el efecto
+        effectSelect.addEventListener('change', () => {
+            const sel = effectSelect.value;
+            if (sel === 'particles') initParticles();
+            if (sel === 'matrix') initMatrix();
+        });
+
+        // Manejar resize correctamente
+        let rafId = null;
+        let lastTime = 0;
+        window.addEventListener('resize', () => {
+            // recalcular tamaños y backing store
+            fixHDPI();
+            // re-inicializar datos dependientes de tamaño
+            initParticles();
+            initMatrix();
+            // evitar un salto grande en dt
+            lastTime = 0;
+        });
+
         function loop(t) {
             if (!lastTime) lastTime = t;
             const dt = t - lastTime;
@@ -540,22 +604,19 @@
                 else if (sel === 'particles') drawParticles(dt, speed, globalOpacity);
                 else if (sel === 'matrix') drawMatrix(dt, speed, globalOpacity);
             }
-            requestAnimationFrame(loop);
+            rafId = requestAnimationFrame(loop);
         }
-        requestAnimationFrame(loop);
 
-        opacityInput.addEventListener('input', () => { canvas.style.opacity = opacityInput.value });
+        // Empezar loop
+        rafId = requestAnimationFrame(loop);
+
+        // Eventos UI
+        opacityInput.addEventListener('input', () => { canvas.style.opacity = opacityInput.value; });
         canvas.style.opacity = opacityInput.value;
 
-        function fixHDPI() {
-            const dpr = Math.max(1, devicePixelRatio || 1);
-            canvas.width = Math.round(w * dpr);
-            canvas.height = Math.round(h * dpr);
-            ctx.scale(dpr, dpr);
-        }
-        fixHDPI();
-        initParticles();
-        initMatrix();
+        // Limpiar on unload
+        window.addEventListener('beforeunload', () => { if (rafId) cancelAnimationFrame(rafId); });
+
     </script>
 </body>
 
