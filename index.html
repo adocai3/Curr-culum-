@@ -22,7 +22,7 @@
             overflow-x: hidden;
             /* evita scroll lateral en móviles */
             background: #000;
-            /* fondo de fallback mientras carga canvas */
+            /* fondo fallback mientras carga el canvas */
         }
 
         /* Canvas del fondo animado */
@@ -35,7 +35,7 @@
             z-index: 0;
             display: block;
             pointer-events: none;
-            /* para que no interfiera con controles */
+            /* que no interfiera con controles */
         }
 
         /* Panel de control del fondo */
@@ -230,6 +230,7 @@
             background: #00cc66;
         }
 
+        /* Móvil */
         @media (max-width:600px) {
             .container {
                 padding: 20px;
@@ -245,13 +246,19 @@
                 margin-top: 20px;
             }
 
-            /* Ajuste para el panel UI en pantallas muy pequeñas */
+            /* Panel UI centrado abajo y no molesta */
             .ui {
-                right: 10px;
-                left: 10px;
+                position: fixed;
+                left: 50%;
+                bottom: 15px;
                 top: auto;
-                bottom: 18px;
-                min-width: auto;
+                transform: translateX(-50%);
+                width: 90%;
+                max-width: 320px;
+                min-width: unset;
+                padding: 12px;
+                font-size: 14px;
+                z-index: 5;
             }
         }
     </style>
@@ -309,8 +316,10 @@
         <h2>Perfil Profesional</h2>
         <p>Técnico informático con más de 7 años de experiencia en soporte, sistemas y ciberseguridad. Especializado en
             administración de sistemas, redes y ciberseguridad en entornos corporativos, sanitarios y públicos.
-            Orientado a la resolución eficaz de incidencias, servicio al usuario y mejora continua. Comprometido con la
-            formación permanente y la excelencia tecnológica.</p>
+            Orientado a la
+            resolución eficaz de incidencias, servicio al usuario y mejora continua. Comprometido con la formación
+            permanente
+            y la excelencia tecnológica.</p>
 
         <h2>Habilidades Técnicas</h2>
         <ul>
@@ -337,6 +346,7 @@
         </ul>
 
         <h2>Experiencia Profesional</h2>
+
         <div class="experience-item">
             <div class="position">Técnico de Soporte Informático N2</div>
             <div class="company-date">NTT DATA / GVA Subvenciones | Mar 2025 – Jun 2025</div>
@@ -392,6 +402,18 @@
             </ul>
         </div>
 
+        <!-- NUEVA EXPERIENCIA INELCOM (Movistar) 2017-2022 -->
+        <div class="experience-item">
+            <div class="position">Técnico de soporte</div>
+            <div class="company-date">Inelcom / usuarios movistar | 2017-2022</div>
+            <ul>
+                <li>Gestión de incidencias y soporte de equipos residenciales (routers,móviles, amplificadores,teléfono
+                    fijo,app tv, descodificadores)</li>
+                <li>Ticketing telco, aplicaciones propias y soporte telefónico</li>
+                <li>Configuración, revisión,aperturas de averías, resolución y pruebas de equipos</li>
+            </ul>
+        </div>
+
         <h2>Formación Académica</h2>
         <ul>
             <li>Especialización en Ciberseguridad en Entornos de Tecnologías de la Información – IES Antonio Sequeros
@@ -436,12 +458,12 @@
         <div class="footer">&copy; 2025 Adonis Gramaje Victoria</div>
     </div>
 
-    <!-- Script del fondo animado (correcciones aplicadas) -->
+    <!-- Script del fondo animado -->
     <script>
         const canvas = document.getElementById('bg');
         const ctx = canvas.getContext('2d');
 
-        // Variables de tamaño en píxeles lógicos (CSS pixels)
+        // Tamaño lógico en píxeles CSS
         let w = window.innerWidth;
         let h = window.innerHeight;
 
@@ -451,17 +473,18 @@
         const togglePauseBtn = document.getElementById('togglePause');
 
         let paused = false;
+
         togglePauseBtn.addEventListener('click', () => {
             paused = !paused;
             togglePauseBtn.textContent = paused ? 'Reanudar' : 'Pausar';
         });
 
-        // Evitar dibujar cuando la pestaña está oculta (ahorra CPU)
+        // Pausar cuando la pestaña está oculta (ahorra CPU)
         document.addEventListener('visibilitychange', () => {
-            paused = document.hidden ? true : paused;
+            if (document.hidden) paused = true;
         });
 
-        // Inicializa el canvas para pantallas HiDPI sin acumular transformaciones
+        // Inicializa el canvas para pantallas HiDPI
         function fixHDPI() {
             const dpr = Math.max(1, window.devicePixelRatio || 1);
             // Tamaño CSS
@@ -470,15 +493,31 @@
             // Tamaño real del backing store
             canvas.width = Math.round(window.innerWidth * dpr);
             canvas.height = Math.round(window.innerHeight * dpr);
-            // Establecer transform para mapear coordenadas lógicas -> backing store (resetea transform)
+            // Mapear coordenadas lógicas -> backing store (resetea transform)
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            // Mantener w y h en píxeles lógicos para el código de dibujo
             w = window.innerWidth;
             h = window.innerHeight;
         }
 
         // Llamar a fixHDPI inicialmente
         fixHDPI();
+
+        // Manejar resize correctamente
+        window.addEventListener('resize', () => {
+            fixHDPI();
+            // Re-inicializar datos dependientes de tamaño
+            initParticles();
+            initMatrix();
+            lastTime = 0;
+        });
+
+        // Controlar opacidad del canvas
+        function applyOpacity() {
+            const globalOpacity = parseFloat(opacityInput.value) || 1;
+            canvas.style.opacity = String(globalOpacity);
+        }
+        opacityInput.addEventListener('input', applyOpacity);
+        applyOpacity();
 
         // --- Gradiente ---
         function drawGradient(t, speed, globalOpacity) {
@@ -498,10 +537,12 @@
 
         // --- Partículas ---
         let particles = [];
-        const PARTICLE_COUNT = 90;
+        const BASE_PARTICLE_COUNT = 90;
+
         function initParticles() {
             particles = [];
-            const n = Math.max(30, Math.floor(PARTICLE_COUNT * (w / 1366)));
+            // Escalar cantidad por ancho para que en móvil haya menos
+            const n = Math.max(30, Math.floor(BASE_PARTICLE_COUNT * (w / 1366)));
             for (let i = 0; i < n; i++) {
                 particles.push({
                     x: Math.random() * w,
@@ -512,9 +553,11 @@
                 });
             }
         }
+
         function drawParticles(dt, speed, globalOpacity) {
             ctx.fillStyle = `rgba(6,8,15,${0.18 * globalOpacity})`;
             ctx.fillRect(0, 0, w, h);
+
             for (let p of particles) {
                 p.x += p.vx * dt * 0.06 * speed;
                 p.y += p.vy * dt * 0.06 * speed;
@@ -523,6 +566,8 @@
                 if (p.y < 0) p.y = h;
                 if (p.y > h) p.y = 0;
             }
+
+            // Conexiones
             ctx.beginPath();
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
@@ -535,6 +580,8 @@
             ctx.strokeStyle = `rgba(160,220,255,${0.08 * globalOpacity})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
+
+            // Puntos
             for (let p of particles) {
                 ctx.beginPath();
                 ctx.fillStyle = `rgba(150,220,255,${0.9 * globalOpacity})`;
@@ -551,6 +598,7 @@
             matrixCols = new Array(cols).fill(0).map(() => Math.floor(Math.random() * h / fontSize));
             matrixChars = '01あいうえおかきくけこサシスセソカキクケコアイウエオ<>/#%$@*■▲'.split('');
         }
+
         function drawMatrix(dt, speed, globalOpacity) {
             ctx.fillStyle = `rgba(0,0,0,${0.15 * globalOpacity})`;
             ctx.fillRect(0, 0, w, h);
@@ -572,51 +620,35 @@
         initParticles();
         initMatrix();
 
-        // Asegurar re-inicialización cuando el usuario cambia el efecto
-        effectSelect.addEventListener('change', () => {
-            const sel = effectSelect.value;
+        // Re-inicializar cuando cambia el efecto (si hace falta)
+        document.getElementById('effect').addEventListener('change', (e) => {
+            const sel = e.target.value;
             if (sel === 'particles') initParticles();
             if (sel === 'matrix') initMatrix();
         });
 
-        // Manejar resize correctamente
-        let rafId = null;
+        // Bucle de animación
         let lastTime = 0;
-        window.addEventListener('resize', () => {
-            // recalcular tamaños y backing store
-            fixHDPI();
-            // re-inicializar datos dependientes de tamaño
-            initParticles();
-            initMatrix();
-            // evitar un salto grande en dt
-            lastTime = 0;
-        });
-
         function loop(t) {
             if (!lastTime) lastTime = t;
             const dt = t - lastTime;
             lastTime = t;
+
             if (!paused) {
                 const sel = effectSelect.value;
                 const speed = parseFloat(speedInput.value) || 1;
                 const globalOpacity = parseFloat(opacityInput.value) || 1;
+
                 if (sel === 'gradient') drawGradient(t, speed, globalOpacity);
                 else if (sel === 'particles') drawParticles(dt, speed, globalOpacity);
                 else if (sel === 'matrix') drawMatrix(dt, speed, globalOpacity);
             }
-            rafId = requestAnimationFrame(loop);
+            requestAnimationFrame(loop);
         }
-
-        // Empezar loop
-        rafId = requestAnimationFrame(loop);
-
-        // Eventos UI
-        opacityInput.addEventListener('input', () => { canvas.style.opacity = opacityInput.value; });
-        canvas.style.opacity = opacityInput.value;
+        requestAnimationFrame(loop);
 
         // Limpiar on unload
-        window.addEventListener('beforeunload', () => { if (rafId) cancelAnimationFrame(rafId); });
-
+        window.addEventListener('beforeunload', () => { cancelAnimationFrame(loop); });
     </script>
 </body>
 
