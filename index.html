@@ -230,6 +230,35 @@
             background: #00cc66;
         }
 
+        .contact-icons a {
+    font-size: 1.6rem;
+    color: #00ff7f;
+    margin-right: 15px;
+    transition: color 0.3s, transform 0.2s;
+}
+
+.contact-icons a:hover {
+    color: #7ef3b8;
+    transform: scale(1.15);
+}
+
+/* Estilo para el icono pdf en imagen */
+.contact-icons a img.icon-pdf {
+    width: 1.6rem;
+    height: auto;
+    margin-right: 15px;
+    vertical-align: middle;
+    cursor: pointer;
+    filter: invert(59%) sepia(72%) saturate(531%) hue-rotate(78deg) brightness(90%) contrast(88%);
+    transition: filter 0.3s, transform 0.2s;
+}
+
+.contact-icons a:hover img.icon-pdf {
+    filter: invert(82%) sepia(54%) saturate(456%) hue-rotate(108deg) brightness(98%) contrast(91%);
+    transform: scale(1.15);
+}
+
+
         /* Móvil */
         @media (max-width:600px) {
             .container {
@@ -305,10 +334,12 @@
                             title="LinkedIn">
                             <i class="fa-brands fa-linkedin"></i>
                         </a>
-                        <a href="https://github.com/adocai3/Curr-culum-/blob/main/CV_Adonis_Gramaje_Victoria-1.pdf"
-                            target="_blank" rel="noopener" title="Descargar CV en PDF">
-                            <i class="fa-regular fa-file-pdf"></i>
-                        </a>
+                    <a href="CV_Adonis_Gramaje_Victoria-1.pdf" download="CV_Adonis_Gramaje_Victoria.pdf" title="Descargar CV en PDF">
+                        <img src="pdf.png" alt="Icono PDF" class="icon-pdf">
+                    </a>
+
+
+
                     </div>
                 </div>
             </div>
@@ -462,7 +493,7 @@
         <div class="footer">&copy; 2025 Adonis Gramaje Victoria</div>
     </div>
 
-   <!-- Animaciones de fondo -->
+    <!-- Animaciones de fondo -->
     <script>
         const canvas = document.getElementById('bg');
         const ctx = canvas.getContext('2d');
@@ -609,4 +640,5 @@
         });
     </script>
 </body>
+
 </html>
