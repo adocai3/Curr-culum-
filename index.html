@@ -20,12 +20,10 @@
             color: #ddd;
             line-height: 1.5;
             overflow-x: hidden;
-            /* evita scroll lateral en móviles */
             background: #000;
-            /* fondo fallback mientras carga el canvas */
         }
 
-        /* Canvas del fondo animado */
+        /* Canvas del fondo PARALLAX SCROLL */
         canvas#bg {
             position: fixed;
             top: 0;
@@ -35,47 +33,6 @@
             z-index: 0;
             display: block;
             pointer-events: none;
-            /* que no interfiera con controles */
-        }
-
-        /* Panel de control del fondo */
-        .ui {
-            position: fixed;
-            right: 18px;
-            top: 18px;
-            z-index: 10;
-            background: rgba(0, 0, 0, 0.35);
-            backdrop-filter: blur(6px);
-            padding: 10px;
-            border-radius: 10px;
-            min-width: 180px;
-        }
-
-        .ui h3 {
-            margin: 0 0 8px 0;
-            font-size: 14px;
-        }
-
-        .ui label {
-            display: block;
-            font-size: 13px;
-            margin: 6px 0
-        }
-
-        .ui select,
-        .ui input[type=range] {
-            width: 100%
-        }
-
-        .ui button {
-            width: 100%;
-            padding: 8px;
-            border-radius: 6px;
-            border: 0;
-            background: #0ea5a4;
-            color: #012;
-            cursor: pointer;
-            margin-top: 8px
         }
 
         /* Contenedor principal del CV */
@@ -84,11 +41,21 @@
             width: 95%;
             padding: 30px 40px;
             margin: 40px auto;
-            background: #121212cc;
+            background: rgba(18, 18, 18, 0.8);
             border-radius: 10px;
             box-shadow: 0 0 35px rgba(0, 0, 0, 0.85);
             position: relative;
             z-index: 2;
+            backdrop-filter: blur(10px);
+        }
+
+        /* MÓVIL: Container más compacto */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px 20px;
+                margin: 10px auto;
+                background: rgba(18, 18, 18, 0.95);
+            }
         }
 
         h1,
@@ -135,6 +102,15 @@
             flex-wrap: wrap;
         }
 
+        /* MÓVIL: Header en columna centrada */
+        @media (max-width: 600px) {
+            .header-flex {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+        }
+
         .contact-icons {
             margin-top: 10px;
         }
@@ -144,6 +120,14 @@
             color: #00ff7f;
             margin-right: 15px;
             transition: color 0.3s, transform 0.2s;
+            display: inline-block;
+        }
+
+        @media (max-width: 600px) {
+            .contact-icons a {
+                font-size: 1.8rem;
+                margin-right: 20px;
+            }
         }
 
         .contact-icons a:hover {
@@ -193,6 +177,17 @@
             box-shadow: 0 0 15px rgba(0, 255, 127, 0.4);
         }
 
+        @media (max-width: 600px) {
+            .foto-perfil {
+                margin-top: 20px;
+            }
+
+            .foto-perfil img {
+                max-width: 70vw;
+                width: 180px;
+            }
+        }
+
         /* Estilos del formulario */
         .contact-form {
             margin-top: 20px;
@@ -208,116 +203,81 @@
 
         .contact-form input,
         .contact-form textarea {
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #00ff7f;
             border-radius: 6px;
             margin-bottom: 15px;
             background: #1a1a1a;
             color: #fff;
+            font-size: 16px;
+        }
+
+        @media (max-width: 600px) {
+
+            .contact-form input,
+            .contact-form textarea {
+                padding: 15px;
+            }
         }
 
         .contact-form button {
             background: #00ff7f;
             border: none;
-            padding: 12px;
+            padding: 14px;
             border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
             transition: background 0.3s;
+            font-size: 16px;
         }
 
         .contact-form button:hover {
             background: #00cc66;
         }
 
-        .contact-icons a {
-    font-size: 1.6rem;
-    color: #00ff7f;
-    margin-right: 15px;
-    transition: color 0.3s, transform 0.2s;
-}
+        /* Icono PDF */
+        .contact-icons a img.icon-pdf {
+            width: 1.6rem;
+            height: auto;
+            margin-right: 15px;
+            vertical-align: middle;
+            cursor: pointer;
+            filter: invert(59%) sepia(72%) saturate(531%) hue-rotate(78deg) brightness(90%) contrast(88%);
+            transition: filter 0.3s, transform 0.2s;
+        }
 
-.contact-icons a:hover {
-    color: #7ef3b8;
-    transform: scale(1.15);
-}
+        .contact-icons a:hover img.icon-pdf {
+            filter: invert(82%) sepia(54%) saturate(456%) hue-rotate(108deg) brightness(98%) contrast(91%);
+            transform: scale(1.15);
+        }
 
-/* Estilo para el icono pdf en imagen */
-.contact-icons a img.icon-pdf {
-    width: 1.6rem;
-    height: auto;
-    margin-right: 15px;
-    vertical-align: middle;
-    cursor: pointer;
-    filter: invert(59%) sepia(72%) saturate(531%) hue-rotate(78deg) brightness(90%) contrast(88%);
-    transition: filter 0.3s, transform 0.2s;
-}
+        /* RESALTADO EJPT */
+        .highlight {
+            background: linear-gradient(90deg, #00ff7f, #7ef3b8);
+            color: #000;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            box-shadow: 0 2px 10px rgba(0, 255, 127, 0.4);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
 
-.contact-icons a:hover img.icon-pdf {
-    filter: invert(82%) sepia(54%) saturate(456%) hue-rotate(108deg) brightness(98%) contrast(91%);
-    transform: scale(1.15);
-}
-
-
-        /* Móvil */
-        @media (max-width:600px) {
-            .container {
-                padding: 20px;
-                margin: 10px;
+        @keyframes glow {
+            from {
+                box-shadow: 0 2px 10px rgba(0, 255, 127, 0.4);
             }
 
-            .header-flex {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .foto-perfil {
-                margin-top: 20px;
-            }
-
-            /* Panel UI centrado abajo y no molesta */
-            .ui {
-                position: fixed;
-                left: 50%;
-                bottom: 15px;
-                top: auto;
-                transform: translateX(-50%);
-                width: 90%;
-                max-width: 320px;
-                min-width: unset;
-                padding: 12px;
-                font-size: 14px;
-                z-index: 5;
+            to {
+                box-shadow: 0 2px 20px rgba(0, 255, 127, 0.7);
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Canvas del fondo animado -->
+    <!-- Canvas PARALLAX SCROLL BACKGROUND -->
     <canvas id="bg"></canvas>
-
-    <!-- Controles del fondo -->
-    <div class="ui" role="region" aria-label="Controles del fondo animado">
-        <h3>Efecto de fondo</h3>
-        <label>
-            Seleccionar efecto
-            <select id="effect">
-                <option value="gradient">Gradiente animado</option>
-                <option value="particles">Partículas conectadas</option>
-                <option value="matrix">Lluvia de código (Matrix)</option>
-            </select>
-        </label>
-        <label>
-            Velocidad
-            <input id="speed" type="range" min="0" max="3" step="0.01" value="1">
-        </label>
-        <label>
-            Opacidad del fondo
-            <input id="opacity" type="range" min="0" max="1" step="0.01" value="1">
-        </label>
-        <button id="togglePause">Pausar</button>
-    </div>
 
     <!-- Contenido del CV -->
     <div class="container">
@@ -325,7 +285,7 @@
             <div>
                 <h1>Adonis Gramaje Victoria</h1>
                 <div class="header-contact">
-                    TÉCNICO INFORMÁTICO ESPECIALISTA EN CIBERSEGURIDAD
+                    TÉCNICO INFORMÁTICO ESPECIALISTA EN INCIDENCIAS
                     <div class="contact-icons">
                         <a href="tel:+34664349811" title="Llamar"><i class="fa-solid fa-phone"></i></a>
                         <a href="mailto:adonixblur21@hotmail.com" title="Enviar correo"><i
@@ -334,12 +294,10 @@
                             title="LinkedIn">
                             <i class="fa-brands fa-linkedin"></i>
                         </a>
-                    <a href="CV_Adonis_Gramaje_Victoria-1.pdf" download="CV_Adonis_Gramaje_Victoria.pdf" title="Descargar CV en PDF">
-                        <img src="pdf.png" alt="Icono PDF" class="icon-pdf">
-                    </a>
-
-
-
+                        <a href="CV_Adonis_Gramaje_Victoria-1.pdf" download="CV_Adonis_Gramaje_Victoria.pdf"
+                            title="Descargar CV en PDF">
+                            <img src="pdf.png" alt="Icono PDF" class="icon-pdf">
+                        </a>
                     </div>
                 </div>
             </div>
@@ -349,21 +307,19 @@
         </div>
 
         <h2>Perfil Profesional</h2>
-        <p>Técnico informático con más de 7 años de experiencia en soporte, sistemas y ciberseguridad. Especializado en
-            administración de sistemas, redes y ciberseguridad en entornos corporativos, sanitarios y públicos.
-            Orientado a la
-            resolución eficaz de incidencias, servicio al usuario y mejora continua. Comprometido con la formación
-            permanente
-            y la excelencia tecnológica.</p>
+        <p>Técnico informático <strong>Especializado en ciberseguridad</strong>  con más de 7 años de experiencia en soporte de incidencias en sistemas, 
+             redes y helpdesk, en entornos corporativos, sanitarios y públicos.
+            Orientado a la resolución eficaz de incidencias, servicio al usuario y mejora continua. Comprometido con la
+            formación permanente y la excelencia tecnológica.</p>
 
         <h2>Habilidades Técnicas</h2>
         <ul>
-            <li>Windows, Linux (Kali, Ubuntu, lliurex, mint, tsurugi, Android)</li>
+            <li>Windows, Linux, Kali, Ubuntu, lliurex, mint, tsurugi, Android</li>
             <li>Cisco, Teldat, Juniper, firewalls, BGP, troubleshooting</li>
             <li>Maquetación y administración de PCs, impresoras, periféricos, máquinas virtuales (VirtualBox, Vmware)
             </li>
             <li>Gestión de incidencias en Jira, Service Now y Remedy</li>
-            <li>Active Directory, Intune, Microsoft 365, Docker,telco, CRM, avaya, logs terminal</li>
+            <li>Active Directory, Intune, Microsoft 365, Docker, telco, CRM, avaya, logs terminal</li>
             <li>Soporte remoto y presencial, administración de credenciales, Bitlocker, Authenticator, RSA</li>
             <li>Redes: configuración de switches, routers, backups, Aruba</li>
         </ul>
@@ -398,11 +354,12 @@
             <div class="position">Técnico de Sistemas</div>
             <div class="company-date">Grupo Hasten (ATOS) / Sanidad | Ago 2024 – Ene 2025</div>
             <ul>
-                <li>Resolución integral de incidencias informáticas en zona la costera hospitale de Xàtiva , Ontinyent y
+                <li>Resolución integral de incidencias informáticas  (comarca la costera) hospital de Xàtiva, Ontinyent y
                     ambulatorios (zona)</li>
-                <li>Reparación de hardware y periféricos</li>
+                <li>Reparación de hardware,software y periféricos</li>
                 <li>Maquetación, configuración e instalación de equipos</li>
-                <li>Gestión de tickets en Jira y soporte presencial</li>
+                <li>Gestión de tickets en Jira , soporte presencial y en remoto</li>
+                <li>Gestión de usuarios,credenciales y permisos(AD)</li>
             </ul>
         </div>
 
@@ -413,6 +370,7 @@
                 <li>Resolución de incidencias con Service Now y HelpIn</li>
                 <li>Administración de entornos virtuales, Active Directory e Intune</li>
                 <li>Soporte usuario en Microsoft 365, Bitlocker, Authenticator y RSA</li>
+                <li>Gestión de usuarios y credenciales</li>
             </ul>
         </div>
 
@@ -421,8 +379,9 @@
             <div class="company-date">Empresa en Ontinyent | 2023</div>
             <ul>
                 <li>Instalación y mantenimiento de software y hardware</li>
-                <li>Maquetación de PCs, tramitación de credenciales , instalación de software y hardware de equipos
+                <li>Maquetación de PCs, tramitación de credenciales, instalación de software y hardware de equipos
                     informáticos</li>
+                    <li>Gestión de usuarios y credenciales</li>
                 <li>Atención a cliente presencial/remota con ticketing</li>
             </ul>
         </div>
@@ -432,19 +391,19 @@
             <div class="company-date">Inelcom / CEX | 2022</div>
             <ul>
                 <li>Gestión de incidencias y soporte de redes (routers, switches, backups, Aruba)</li>
-                <li>Ticketing Remedy y soporte telefónico</li>
-                <li>Configuración, revisión, resolución y pruebas de equipos</li>
+                <li>Ticketing Remedy , soporte telefónico ,correos electrónicos,con usuario final y técnico de calle</li>
+                <li>Configuración, revisión,pruebas de equipos y resolución </li>
+                <li>Revisión caudales,conectividad ,monitorización en VPN y MacroLan</li>
             </ul>
         </div>
 
-        <!-- NUEVA EXPERIENCIA INELCOM (Movistar) 2017-2022 -->
         <div class="experience-item">
             <div class="position">Técnico de soporte</div>
             <div class="company-date">Inelcom / usuarios movistar | 2017-2022</div>
             <ul>
                 <li>Gestión de incidencias y soporte de equipos residenciales (routers,móviles, amplificadores,teléfono
                     fijo,app tv, descodificadores)</li>
-                <li>Ticketing telco, aplicaciones propias y soporte telefónico</li>
+                <li>Ticketing telco, aplicaciones propias y de Teléfonica, soporte telefónico</li>
                 <li>Configuración, revisión,aperturas de averías, resolución y pruebas de equipos</li>
             </ul>
         </div>
@@ -455,7 +414,7 @@
                 (2024-2025)</li>
             <li>Grado Superior en Administración de Sistemas Informáticos en Red (ASIX) – IES Sant Vicent Ferrer
                 (2022-2024)</li>
-            <li>Grado Medio en Sistemas Microinformáticos y Redes – IES L’Estació Ontinyent (2020-2022)</li>
+            <li>Grado Medio en Sistemas Microinformáticos y Redes – IES L'Estació Ontinyent (2020-2022)</li>
         </ul>
 
         <h2>Certificaciones</h2>
@@ -476,7 +435,7 @@
         <ul>
             <li>Castellano (nativo)</li>
             <li>Valenciano (avanzado)</li>
-            <li>Inglés A-2, Cursando B1 (en la EOI)</li>
+            <li>Inglés A-2 matrículado EOI para (B1-Intermedio)</li>
         </ul>
 
         <h2>Contacto</h2>
@@ -493,12 +452,13 @@
         <div class="footer">&copy; 2025 Adonis Gramaje Victoria</div>
     </div>
 
-    <!-- Animaciones de fondo -->
+    <!-- SCRIPT FONDO PARALLAX SCROLL DINÁMICO -->
     <script>
         const canvas = document.getElementById('bg');
         const ctx = canvas.getContext('2d');
 
         let w = window.innerWidth, h = window.innerHeight;
+
         function fixHDPI() {
             const dpr = Math.max(1, window.devicePixelRatio || 1);
             canvas.width = Math.round(window.innerWidth * dpr);
@@ -513,131 +473,86 @@
         fixHDPI();
         window.addEventListener('resize', fixHDPI);
 
-        // Parámetros de UI
-        const effectSelect = document.getElementById('effect');
-        const speedInput = document.getElementById('speed');
-        const opacityInput = document.getElementById('opacity');
-        const togglePauseBtn = document.getElementById('togglePause');
-        let paused = false;
-        togglePauseBtn.addEventListener('click', () => {
-            paused = !paused;
-            togglePauseBtn.textContent = paused ? 'Reanudar' : 'Pausar';
-        });
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) paused = true;
-        });
-        opacityInput.addEventListener('input', () => {
-            canvas.style.opacity = opacityInput.value;
-        });
-        canvas.style.opacity = opacityInput.value;
+        // Variables para parallax scroll
+        let scrollY = 0;
+        let time = 0;
 
-        // --- Gradiente animado
-        function drawGradient(t, speed) {
-            ctx.clearRect(0, 0, w, h);
-            const cx = w / 2 + Math.sin(t * 0.0003 * speed) * w * 0.2;
-            const cy = h / 2 + Math.cos(t * 0.0002 * speed) * h * 0.15;
-            const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w, h) * 0.7);
-            g.addColorStop(0, '#06fce8');
-            g.addColorStop(0.5, '#014f5c');
-            g.addColorStop(1, '#000');
-            ctx.fillStyle = g;
-            ctx.fillRect(0, 0, w, h);
-        }
+        // Detectar scroll para parallax
+        window.addEventListener('scroll', () => {
+            scrollY = window.scrollY;
+        });
 
-        // --- Partículas básicas
-        let particles = [];
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < 70; i++) {
-                particles.push({
-                    x: Math.random() * w,
-                    y: Math.random() * h,
-                    vx: (Math.random() - 0.5) * 1.2,
-                    vy: (Math.random() - 0.5) * 1.2,
-                });
-            }
-        }
-        initParticles();
-        function drawParticles(speed) {
+        function drawParallaxBackground() {
             ctx.clearRect(0, 0, w, h);
-            for (let i = 0; i < particles.length; i++) {
-                let p = particles[i];
-                p.x += p.vx * speed;
-                p.y += p.vy * speed;
-                if (p.x < 0 || p.x > w) p.vx *= -1;
-                if (p.y < 0 || p.y > h) p.vy *= -1;
+
+            // Efecto parallax: múltiples capas que se mueven a diferente velocidad
+            const parallaxSpeed1 = scrollY * 0.3;  // Capa lejana (lenta)
+            const parallaxSpeed2 = scrollY * 0.6;  // Capa media
+            const parallaxSpeed3 = scrollY * 1.2;  // Capa cercana (rápida)
+
+            // Color dinámico basado en scroll
+            const hue = (186 + (scrollY * 0.1)) % 360;
+            const gradient1 = ctx.createLinearGradient(0, 0, w, h);
+            gradient1.addColorStop(0, `hsla(${hue}, 80%, 20%, 0.8)`);
+            gradient1.addColorStop(0.5, `hsla(${(hue + 30) % 360}, 90%, 25%, 0.6)`);
+            gradient1.addColorStop(1, `hsla(${(hue + 60) % 360}, 70%, 15%, 0.9)`);
+
+            // Fondo principal con movimiento parallax
+            ctx.fillStyle = gradient1;
+            ctx.fillRect(0, parallaxSpeed1 * 0.5, w, h);
+
+            // Partículas flotantes que responden al scroll
+            const particleCount = 80;
+            for (let i = 0; i < particleCount; i++) {
+                const x = (w * i / particleCount) + Math.sin(time * 0.01 + i) * 50;
+                const y = (h * 0.3 + parallaxSpeed2 * 0.2) + Math.cos(time * 0.008 + i) * 30;
+                const size = 2 + Math.sin(time * 0.02 + i) * 1;
+                const alpha = 0.4 + Math.sin(scrollY * 0.001 + i) * 0.3;
+
+                ctx.save();
+                ctx.globalAlpha = alpha;
+                ctx.fillStyle = `hsl(${(hue + 120) % 360}, 100%, 60%)`;
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
-                ctx.fillStyle = '#00ff7f';
+                ctx.arc(x, y, size, 0, Math.PI * 2);
                 ctx.fill();
+                ctx.restore();
             }
-            // Líneas entre partículas cercanas
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    let pi = particles[i], pj = particles[j];
-                    let dx = pi.x - pj.x, dy = pi.y - pj.y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 80) {
-                        ctx.strokeStyle = 'rgba(0,255,127,0.2)';
-                        ctx.beginPath();
-                        ctx.moveTo(pi.x, pi.y);
-                        ctx.lineTo(pj.x, pj.y);
-                        ctx.stroke();
-                    }
-                }
+
+            // Líneas conectadas que se mueven con scroll
+            ctx.strokeStyle = `hsla(${(hue + 180) % 360}, 70%, 50%, 0.3)`;
+            ctx.lineWidth = 1;
+            for (let i = 0; i < 20; i++) {
+                const x1 = w * 0.2 + parallaxSpeed3 * 0.1;
+                const y1 = h * 0.1 + (i * h / 20) + parallaxSpeed1;
+                const x2 = w * 0.8;
+                const y2 = y1 + Math.sin(time * 0.005 + i) * 20;
+
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
             }
-        }
 
-        // --- Matrix lluvia de letras
-        let fontSize = 17, columns = Math.floor(w / fontSize), matrixDrops = [];
-        function initMatrix() {
-            columns = Math.floor(w / fontSize);
-            matrixDrops = Array(columns).fill(1);
-        }
-        initMatrix();
-        const chars = 'アカサタナハマヤラワガザダバパイキシチニヒミリヰギジヂビピウクスツヌフムユルグズヅブプエケセテネヘメレヱゲゼデベペオコソトノホモヨロヲゴゾドボポヴッンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            // Gradiente central animado
+            const cx = w * 0.5 + Math.sin(time * 0.002) * 100;
+            const cy = h * 0.5 + parallaxSpeed2 * 0.3 + Math.cos(time * 0.0015) * 80;
+            const centralGradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, 300);
+            centralGradient.addColorStop(0, `hsla(${(hue + 90) % 360}, 100%, 50%, 0.6)`);
+            centralGradient.addColorStop(0.7, `hsla(${(hue + 120) % 360}, 80%, 40%, 0.3)`);
+            centralGradient.addColorStop(1, 'transparent');
 
-        function drawMatrix(speed) {
-            ctx.fillStyle = 'rgba(0,0,0,0.1)';
+            ctx.fillStyle = centralGradient;
             ctx.fillRect(0, 0, w, h);
-            ctx.font = fontSize + 'px monospace';
-            for (let i = 0; i < matrixDrops.length; i++) {
-                let text = chars[Math.floor(Math.random() * chars.length)];
-                let x = i * fontSize;
-                let y = matrixDrops[i] * fontSize;
-                ctx.fillStyle = '#00ff7f';
-                ctx.fillText(text, x, y);
-                if (y > h && Math.random() > 0.975) matrixDrops[i] = 0;
-                matrixDrops[i]++;
-            }
+
+            time++;
         }
 
-        // --- Animación frame loop
-        let lastTime = 0;
-        function animate(now) {
-            if (!paused) {
-                let speed = Number(speedInput.value);
-                let op = Number(opacityInput.value);
-                canvas.style.opacity = op;
-                const effect = effectSelect.value;
-                if (effect === 'gradient') drawGradient(now, speed);
-                else if (effect === 'particles') drawParticles(speed);
-                else if (effect === 'matrix') drawMatrix(speed);
-            }
+        // Animación continua
+        function animate() {
+            drawParallaxBackground();
             requestAnimationFrame(animate);
         }
-        requestAnimationFrame(animate);
-
-        // Cambios de efecto -> reset
-        effectSelect.addEventListener('change', () => {
-            if (effectSelect.value === 'particles') initParticles();
-            else if (effectSelect.value === 'matrix') initMatrix();
-        });
-        window.addEventListener('resize', () => {
-            fixHDPI();
-            initParticles();
-            initMatrix();
-        });
+        animate();
     </script>
 </body>
 
